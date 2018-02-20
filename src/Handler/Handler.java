@@ -86,7 +86,7 @@ public class Handler {
             
             BufferedWriter writter =new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true), "utf-8"));
             
-            writter.write(clientNameFile + "," + productNameFile + "," + priceFile + "," + amountFile + "," + dateTimeFile);
+            writter.write(clientNameFile + "," + productNameFile + "," + priceFile + "," + amountFile + "," + dateTimeFile + "\r\n");
           
             writter.close();
             
