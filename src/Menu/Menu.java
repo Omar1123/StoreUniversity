@@ -33,9 +33,11 @@ public class Menu {
         System.out.println("3) Corte de caja");
         
         option = scannerOption.nextInt();
+        
+        chooseHandler(option);
     }
     
-    public void chooseHandler(int option) {
+    private void chooseHandler(int option) {
         
         if(option == 1) {
             handler.doPurchase();
