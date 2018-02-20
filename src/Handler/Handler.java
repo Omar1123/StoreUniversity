@@ -85,6 +85,9 @@ public class Handler {
             writter.write(clientNameFile + "," + productNameFile + "," + priceFile + "," + amountFile + "," + dateTimeFile);
           
             writter.close();
+            
+            System.out.println("Se ha realizado con exito su compra");
+            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }      

@@ -5,6 +5,7 @@
  */
 package Menu;
 
+import Handler.Handler;
 import java.util.Scanner;
 
 /**
@@ -14,8 +15,10 @@ import java.util.Scanner;
 public class Menu {
     
     private int option;
+    private Handler handler;
     
     public Menu() {
+        handler = new Handler();
         option = 0;
     }
     
@@ -35,7 +38,7 @@ public class Menu {
     public void chooseHandler(int option) {
         
         if(option == 1) {
-            
+            handler.doPurchase();
         }
         
         if(option == 2) {
