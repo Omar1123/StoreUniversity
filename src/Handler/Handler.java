@@ -5,6 +5,11 @@
  */
 package Handler;
 
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +28,12 @@ public class Handler {
     private int amount;
     private String dateTime;
     
+    //File import
+    
+    private FileOutputStream fileStream;    
+    private File FILENAME = new File("/Users/jake/NetBeansProjects/StoreUniversity/src/STORE.txt");
+    private DataOutputStream data;    
+    
     public Handler() {
         clientName = "";
         ProductName = "";
@@ -32,6 +43,8 @@ public class Handler {
     }
     
     public void doPurchase() {
+        
+        createStoreFile(FILENAME);
         
         Scanner scannerPurchase = new Scanner(System.in);
         
@@ -46,16 +59,47 @@ public class Handler {
         
         System.out.println("Ingrese la cantidad de producto a llevar");
         amount = scannerPurchase.nextInt();
-       
-    
+          
         dateTime = getDateTime();
-   }
+        
+        createStorePurchase(FILENAME, clientName, ProductName, price, amount, dateTime);
+    }
     
-   private String getDateTime() {
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date today = Calendar.getInstance().getTime();        
-        String purcharseDate = df.format(today);
-        return purcharseDate;
-   }
+    private String getDateTime() {
+         DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+         Date today = Calendar.getInstance().getTime();        
+         String purcharseDate = df.format(today);
+         return purcharseDate;
+    }
+   
+    private void createStorePurchase(File file, String clientNameFile, String productNameFile, 
+            double priceFile, int amountFile, String dateTimeFile) {        
+        try {
+          
+            if(!file.exists()){  
+                file.createNewFile();
+            }
+            
+            BufferedWriter writter =new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file,true), "utf-8"));
+            
+            writter.write(clientNameFile + "," + productNameFile + "," + priceFile + "," + amountFile + "," + dateTimeFile);
+          
+            writter.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }      
+    }
     
+    private void createStoreFile(File file) {
+        
+        System.out.println("Creando el documento con los datos");
+        
+        try {          
+            if(!file.exists()){
+                file.createNewFile();
+            }          
+        } catch (Exception ex) {            
+            System.out.println(ex.getMessage());
+        } 
+    }
 }
