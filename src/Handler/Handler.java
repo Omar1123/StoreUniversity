@@ -50,23 +50,28 @@ public class Handler {
         
         Scanner scannerPurchase = new Scanner(System.in);
         
-        System.out.println("Ingrese el nombre del cliente");
-        clientName = scannerPurchase.next();
+        try {
+            System.out.println("Ingrese el nombre del cliente");
+            clientName = scannerPurchase.next();
         
-        System.out.println("Ingrese el nombre del producto");
-        ProductName = scannerPurchase.next();
+            System.out.println("Ingrese el nombre del producto");
+            ProductName = scannerPurchase.next();
+
+            System.out.println("Ingrese el precio del producto");
+            price = scannerPurchase.nextDouble();
+
+            System.out.println("Ingrese la cantidad de producto a llevar");
+            amount = scannerPurchase.nextInt();
+
+            dateTime = getDateTime();
+
+            createStorePurchase(FILENAME, clientName, ProductName, price, amount, dateTime);
         
-        System.out.println("Ingrese el precio del producto");
-        price = scannerPurchase.nextDouble();
-        
-        System.out.println("Ingrese la cantidad de producto a llevar");
-        amount = scannerPurchase.nextInt();
-          
-        dateTime = getDateTime();
-        
-        createStorePurchase(FILENAME, clientName, ProductName, price, amount, dateTime);
-        
-        doOtherPurchase();
+            doOtherPurchase();   
+        } catch(Exception ex) {
+            System.out.println("Revisa los formatos de lo que has ingresado");
+            doPurchase();
+        }             
     }
     
     private String getDateTime() {
