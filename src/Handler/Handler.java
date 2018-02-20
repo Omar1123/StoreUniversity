@@ -27,6 +27,7 @@ public class Handler {
     private double price;
     private int amount;
     private String dateTime;
+    private int option;
     
     //File import
     
@@ -40,6 +41,7 @@ public class Handler {
         price = 0.0;
         amount = 0;
         dateTime = "";
+        option = 0;
     }
     
     public void doPurchase() {
@@ -63,6 +65,8 @@ public class Handler {
         dateTime = getDateTime();
         
         createStorePurchase(FILENAME, clientName, ProductName, price, amount, dateTime);
+        
+        doOtherPurchase();
     }
     
     private String getDateTime() {
@@ -104,5 +108,18 @@ public class Handler {
         } catch (Exception ex) {            
             System.out.println(ex.getMessage());
         } 
+    }
+    
+    private void doOtherPurchase() {
+        
+        Scanner scannerDecitionPurchase = new Scanner(System.in);
+        System.out.println("Desea ingresar otra compra(1:SI/2:NO)");
+        option = scannerDecitionPurchase.nextInt();
+        
+        if(option == 1) {
+            doPurchase();
+        } else {
+            System.out.println("Gracias por realizar su compra");    
+        }             
     }
 }
